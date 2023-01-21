@@ -41,7 +41,7 @@ void loop() {
     analogWrite(5, HIGH);
   }
 
-  else if(ms_value<=300);
+  if(ms_value<=300);
   {
     analogWrite(5, LOW);
     delay(3000);
