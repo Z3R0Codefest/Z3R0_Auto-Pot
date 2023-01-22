@@ -4,7 +4,7 @@
 DHT dht(3, DHT11);
 Adafruit_SSD1306 display(OLED_RESET);
 
-void setup() {
+void setup(){
  Serial.begin(9600);
  pinMode(A0, INPUT);
  pinMode(5, OUTPUT);
@@ -15,11 +15,11 @@ void setup() {
 
 void loop() {
   //OLED
-  display.clearDisplay();
+  display.clearDisplay(); 
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0,0);
-  
+
 
   //Humidity and Temperature
    float t = dht.readTemperature();
@@ -33,20 +33,23 @@ void loop() {
 
   //Moisture
   int ms_value = analogRead(A0);
-  Serial.print("Moisture: ")
+  Serial.print("Moisture: ");
   Serial.println(ms_value);
 
-  if(ms_value >=500);
+  if(ms_value<=300)
   {
-    analogWrite(5, HIGH);
+    digitalWrite(5, LOW);
+    delay(1500);
+    digitalWrite(5, HIGH);
+    delay(10000);
+
+  }
+  else
+  {
+    digitalWrite(5, LOW);
+    delay(1000);
   }
 
-  if(ms_value<=300);
-  {
-    analogWrite(5, LOW);
-    delay(3000);
-  }
-  
   delay(1000);
   display.display();
 }
